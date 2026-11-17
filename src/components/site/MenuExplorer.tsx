@@ -125,7 +125,7 @@ export function MenuExplorer() {
     <div>
       <div className="sticky top-0 z-20 -mx-5 space-y-4 border-b bg-background/95 px-5 py-4 backdrop-blur md:-mx-8 md:px-8">
         <div className="flex items-center gap-4">
-          <GroupSwitch value={group} onChange={(v) => { setGroup(v as typeof group); setCat("all"); }} options={[["all", "All"], ["drinks", "Drinks"], ["food", "Food"]]} />
+          <GroupSwitch value={group} onChange={(v) => { setGroup(v as typeof group); setCat("all"); }} options={[["all", "All"], ["food", "Food"], ["drinks", "Drinks"]]} />
         </div>
         <div className="-mx-5 flex gap-2 overflow-x-auto px-5 pb-1 md:mx-0 md:px-0" role="tablist" aria-label="Menu categories">
           {[{ id: "all", name: "Everything" }, ...visibleCats].map((c) => (
