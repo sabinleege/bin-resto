@@ -123,14 +123,14 @@ export function MenuExplorer() {
 
   return (
     <div>
-      <div className="sticky top-0 z-20 -mx-5 space-y-4 border-b bg-background/95 px-5 py-4 backdrop-blur md:-mx-8 md:px-8">
+      <div className="relative z-20 md:sticky md:top-0 -mx-5 space-y-4 border-b bg-background/95 px-5 py-4 backdrop-blur md:-mx-8 md:px-8">
         <div className="flex items-center gap-4">
           <GroupSwitch value={group} onChange={(v) => { setGroup(v as typeof group); setCat("all"); }} options={[["all", "All"], ["food", "Food"], ["drinks", "Drinks"]]} />
         </div>
-        <div className="-mx-5 flex gap-2 overflow-x-auto px-5 pb-1 md:mx-0 md:px-0" role="tablist" aria-label="Menu categories">
+        <div className="flex flex-wrap gap-2" role="tablist" aria-label="Menu categories">
           {[{ id: "all", name: "Everything" }, ...visibleCats].map((c) => (
             <button key={c.id} role="tab" aria-selected={cat === c.id} onClick={() => setCat(c.id)}
-              className={cn("shrink-0 rounded-full border px-4 py-1.5 text-sm transition-all duration-300", cat === c.id ? "border-burgundy bg-burgundy text-primary-foreground shadow-soft" : "hover:border-gold hover:text-burgundy")}>
+              className={cn("shrink-0 rounded-full border px-4 py-1.5 text-sm transition-all duration-300", cat === c.id ? "border-orange bg-orange text-ivory shadow-soft" : "hover:border-orange hover:text-orange")}>
               {c.name}
             </button>
           ))}
@@ -143,28 +143,24 @@ export function MenuExplorer() {
           <Button variant="outline" className="mt-6" onClick={() => { setCat("all"); setGroup("all"); }}>Show the full menu</Button>
         </div>
       ) : (
-        <div key={`${group}-${cat}`} className="mt-12 space-y-20">
+        <div key={`${group}-${cat}`} className="mt-10 space-y-14">
           {sections.map((s, si) => (
             <section key={s.id} aria-labelledby={`cat-${s.id}`} className="animate-in fade-in slide-in-from-bottom-8 fill-mode-both duration-700" style={{ animationDelay: `${Math.min(si, 4) * 90}ms` }}>
               <header>
-                <div>
-                  <p className="eyebrow text-gold">{s.group === "drinks" ? "Drinks" : "Kitchen"} · {s.items.length} {s.items.length === 1 ? "item" : "items"}</p>
-                  <h2 id={`cat-${s.id}`} className="mt-2 text-5xl md:text-6xl">{s.name}</h2>
-                  {s.note && <p className="mt-3 inline-flex items-center gap-2 rounded-full bg-forest px-3 py-1 text-xs text-ivory"><Coffee className="size-3.5" /> {s.note}</p>}
-                  <div className="mt-5 h-px origin-left animate-[rule_1.2s_ease-out_both] bg-gold" style={{ animationDelay: `${Math.min(si, 4) * 90 + 200}ms` }} />
-                </div>
+                <h2 id={`cat-${s.id}`} className="menu-ribbon">{s.name}</h2>
+                {s.note && <p className="mt-3 inline-flex items-center gap-2 rounded-full bg-forest px-3 py-1 text-xs text-ivory"><Coffee className="size-3.5" /> {s.note}</p>}
               </header>
-              <ul className="mt-8 grid gap-x-14 md:grid-cols-2">
+              <ul className="mt-5 grid gap-x-14 md:grid-cols-2">
                 {s.items.map((m, i) => (
                   <li key={m.id} className="animate-in fade-in slide-in-from-bottom-3 fill-mode-both duration-500" style={{ animationDelay: `${Math.min(si, 4) * 90 + 150 + Math.min(i, 14) * 35}ms` }}>
                     <div role="button" tabIndex={0} onClick={() => setDetail(m)} onKeyDown={(e) => e.key === "Enter" && setDetail(m)}
-                      className="group flex cursor-pointer items-center gap-4 border-b border-border/70 py-4 transition-colors duration-300 hover:border-gold">
+                      className="group flex cursor-pointer items-center gap-3 py-2.5">
                       <div className="min-w-0 flex-1">
-                        <div className="flex items-baseline gap-3">
-                          <h3 className="font-display text-xl leading-tight transition-colors duration-300 group-hover:text-burgundy md:text-2xl">{m.name}</h3>
-                          {m.tags?.[0] && <span className="eyebrow shrink-0 text-[0.55rem] text-gold">{tagLabel[m.tags[0]]}</span>}
-                          <span aria-hidden className="mb-1 hidden flex-1 border-b border-dotted border-muted-foreground/40 sm:block" />
-                          <span className="ml-auto shrink-0 text-sm font-medium tabular-nums sm:ml-0">{priceText(m)}</span>
+                        <div className="flex items-baseline gap-2">
+                          <h3 className="min-w-0 font-sans text-base font-semibold leading-tight transition-colors duration-300 group-hover:text-orange md:text-lg">{m.name}</h3>
+                          {m.tags?.[0] && <span className="eyebrow hidden shrink-0 text-[0.55rem] text-orange sm:inline">{tagLabel[m.tags[0]]}</span>}
+                          <span aria-hidden className="mb-1 min-w-4 flex-1 border-b-2 border-dotted border-foreground/50" />
+                          <span className="shrink-0 text-base font-bold text-orange tabular-nums md:text-lg">{priceText(m)}</span>
                         </div>
                         {m.description && <p className="mt-1 text-sm text-muted-foreground">{m.description}</p>}
                       </div>

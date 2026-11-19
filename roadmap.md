@@ -12,4 +12,5 @@
 - [x] All sections always visible
 - [x] Connect +250780858565 for WhatsApp orders, bookings and phone contact
 - [x] Polish photo presentation and check mobile/desktop photos
+- [x] Orange ribbon menu style + food menu from owner PDF
 - [ ] Social links — waiting on owner

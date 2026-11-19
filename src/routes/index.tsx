@@ -45,14 +45,14 @@ function Home() {
   const specials = [
     pickItem("Cappuccino", coffee, "Barista's pick"),
     pickItem("African Coffee", africanCup, "Grab & Go"),
-    pickItem("Grilled Beef Steak", beefSteak, "House special"),
+    pickItem("Beef Steak", beefSteak, "House special"),
   ];
   const best = [
     pickItem("African Coffee", africanCoffee),
     pickItem("Passion Juice", passionJuice),
     pickItem("Rolex", breakfast),
     pickItem("Chicken Club Sandwich", sandwich),
-    pickItem("Beef / Veggie Samosa", samosa),
+    pickItem("Snacks Platter", samosa),
     pickItem("Chicken Wrap Plain", chickenWrap),
   ];
   const { add } = useCart();
